@@ -11,8 +11,7 @@ count =int(nums[2])
 resp = requests.get(url)
 soup = BeautifulSoup(resp.text,"html.parser")   #"html.parser" 是啥
 all_a_tag = soup.find_all('a')
-baseURL = "https://www.iana.org/domains/reserved"
-
+baseURL = url
 
 for a_tag in all_a_tag:
         href = a_tag.get("href") # 嘗試取得 <a> 裡的 href  屬性值
@@ -22,4 +21,5 @@ for a_tag in all_a_tag:
         for a_tag2 in all_a_tag2:
                 href2 = a_tag2.get("href")
                 a = urljoin(baseURL, href2) 
-                print(a)
+                
+print(a)
