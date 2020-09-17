@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-def geturl(url_one):#
+def geturl(url_one):
     clist = []
     resp = requests.get(url_one)
     soup = BeautifulSoup(resp.text,"html.parser")   
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     cotlist = [url]
     tmp_urls = []
     
-     #檢查是否有重複
+     
     
     for i in range(count):
         print("level:", i+1)
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             
             print("get ", cot, "'s hyperlinks") #執行第一次時cotlist 裡面是外部輸入的URL
             hyperlinks = geturl(cot)            #運行函式得到一個或多個新的網址
-            hyperlinks = cheackURl(hyperlinks)  #檢查是否有重複
+           # hyperlinks = cheackURl(hyperlinks)  #檢查是否有重複
             tmpJobs.extend(hyperlinks)          #更新tmpJobs 
             alllist.extend(hyperlinks)          #更新alllist
         cotlist = tmpJobs                       #更新cotlist 運行第二次時 就會跑新的URL
@@ -58,3 +58,4 @@ for pr in alllist:
     a +=1
     print(a,pr)
 
+#第50行 有檢查是否重複 沒這行是 69 有呼叫 為53
