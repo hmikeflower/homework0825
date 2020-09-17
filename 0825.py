@@ -4,12 +4,12 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-def geturl(url_one):
+def geturl(url_one):#
+    clist = []
     resp = requests.get(url_one)
     soup = BeautifulSoup(resp.text,"html.parser")   
     all_a_tag = soup.find_all('a')
-    #baseURL = url_one
-    clist = []
+   
     for a_tag in all_a_tag:
         href = a_tag.get("href")
         re_url = urljoin(url_one, href)
@@ -17,14 +17,44 @@ def geturl(url_one):
 
     return clist       
 
+def cheackURl(cheacklist): #檢查URL 是否重複
+    newURL= []
+    for cheack in cheacklist :
+        if cheack  not in newURL :
+            newURL.append(cheack)
+       
+    return newURL 
+
 
 if __name__ == "__main__":
 
     nums = sys.argv
     url = nums[1]
     count =int(nums[2])
-
-#clist = []    #這邊有的話，會出錯。
-    for cot in range(count):
-        url_list = geturl(url)
+    a = 0
+    collectURLs = set()
+    alllist = []
+    cotlist = [url]
+    tmp_urls = []
     
+     #檢查是否有重複
+    
+    for i in range(count):
+        print("level:", i+1)
+        tmpJobs = []
+        
+        for cot in cotlist:
+            
+            print("get ", cot, "'s hyperlinks") #執行第一次時cotlist 裡面是外部輸入的URL
+            hyperlinks = geturl(cot)            #運行函式得到一個或多個新的網址
+            hyperlinks = cheackURl(hyperlinks)  #檢查是否有重複
+            tmpJobs.extend(hyperlinks)          #更新tmpJobs 
+            alllist.extend(hyperlinks)          #更新alllist
+        cotlist = tmpJobs                       #更新cotlist 運行第二次時 就會跑新的URL
+
+
+
+for pr in alllist:
+    a +=1
+    print(a,pr)
+
