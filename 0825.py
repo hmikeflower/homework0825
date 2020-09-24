@@ -32,8 +32,8 @@ if __name__ == "__main__":
     url = nums[1]
     count =int(nums[2])
     a = 0
-    collectURLs = set()
-    alllist = []
+    
+    allset = set()
     cotlist = [url]
     tmp_urls = []
     
@@ -43,19 +43,18 @@ if __name__ == "__main__":
         print("level:", i+1)
         tmpJobs = []
         
-        for cot in cotlist:
-            
-            print("get ", cot, "'s hyperlinks") #執行第一次時cotlist 裡面是外部輸入的URL
-            hyperlinks = geturl(cot)            #運行函式得到一個或多個新的網址
-           # hyperlinks = cheackURl(hyperlinks)  #檢查是否有重複
-            tmpJobs.extend(hyperlinks)          #更新tmpJobs 
-            alllist.extend(hyperlinks)          #更新alllist
+        for cot in cotlist: 
+            if cot in cotlist :                     #檢查重複? 
+                print("get ", cot, "'s hyperlinks") #執行第一次時cotlist 裡面是外部輸入的URL
+                hyperlinks = geturl(cot)            #運行函式得到一個或多個新的網址
+                tmpJobs.extend(hyperlinks)          #更新tmpJobs 
+                allset.update(hyperlinks)              #更新alllist
         cotlist = tmpJobs                       #更新cotlist 運行第二次時 就會跑新的URL
 
 
-
+alllist =list(allset)
 for pr in alllist:
     a +=1
     print(a,pr)
 
-#第50行 有檢查是否重複 沒這行是 69 有呼叫 為53
+print(len(allset))
