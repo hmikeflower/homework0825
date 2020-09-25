@@ -1,0 +1,20 @@
+@local=127.0.0.1
+@port=3456
+
+### Hello world
+GET http://127.0.0.1:3456/a/b/c.htm HTTP/1.1
+
+### test
+GET http://127.0.0.1:3456/a/a/a.htm HTTP/1.1
+
+### register test
+GET http://127.0.0.1:3456/register HTTP/1.1
+
+### Hello world
+GET http://{{local}}:{{port}} HTTP/1.1
+Content-Type: application/json
+
+{
+
+    
+}
